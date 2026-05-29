@@ -1,0 +1,9 @@
+{
+  "desc": "whois spy mini program",
+  "rules": [
+    {
+      "action": "allow",
+      "page": "*"
+    }
+  ]
+}

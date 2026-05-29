@@ -1,0 +1,162 @@
+<view class="page">
+  <view class="panel" wx:if="{{loading}}">
+    <view class="title">加载中</view>
+    <view class="subtitle">正在连接房间。</view>
+  </view>
+
+  <view class="panel" wx:if="{{!loading && error}}">
+    <view class="title">连接失败</view>
+    <view class="subtitle">{{error}}</view>
+    <button class="btn btn-primary btn-md btn-block" bindtap="bootstrap">重新连接</button>
+    <button class="btn btn-ghost btn-md btn-block" bindtap="onBackHome">返回首页</button>
+  </view>
+
+  <block wx:if="{{!loading && !error && room}}">
+    <view class="panel">
+      <view class="row">
+        <view>
+          <view class="section-title">房间 {{room.roomCode}}</view>
+          <view class="meta">第 {{room.roundNo}} 轮 · {{phaseText}}</view>
+        </view>
+        <view class="badge">{{room.aliveCount}} 人存活</view>
+      </view>
+      <view class="divider"></view>
+      <view class="row">
+        <button class="btn btn-ghost btn-sm" bindtap="onCopyRoomCode">复制房间号</button>
+        <view class="small">所有人都是玩家</view>
+      </view>
+      <view class="divider"></view>
+      <view class="list-item">
+        <view class="meta">我的名称</view>
+        <view class="title" style="font-size: 36rpx;">{{room.myName || '未命名'}}</view>
+      </view>
+    </view>
+
+    <view class="panel" wx:if="{{room.status === 'speaking' || room.status === 'voting'}}">
+      <view class="section-title">我的词语</view>
+      <view class="list-item">
+        <view class="title" style="font-size: 52rpx; text-align: center; margin: 16rpx 0;">{{room.myWord}}</view>
+        <view class="small" style="text-align: center;">请只在自己的手机上查看。</view>
+      </view>
+      <view class="stack" wx:if="{{room.canRerollWords}}">
+        <button class="btn btn-secondary btn-md btn-block" bindtap="onRerollWords">换词汇</button>
+      </view>
+    </view>
+
+    <view class="panel" wx:if="{{room.eliminatedName && room.status !== 'lobby' && room.status !== 'voting'}}">
+      <view class="section-title">上一轮结果</view>
+      <view class="list-item">得票最高并被淘汰：{{room.eliminatedName}}</view>
+    </view>
+
+    <view class="panel" wx:if="{{room.status === 'lobby'}}">
+      <view class="section-title">等待加入</view>
+      <view class="list-item">已加入：{{room.players.length}} / {{room.config.playerCount}}</view>
+      <view class="list">
+        <view class="list-item" wx:for="{{room.lobbyPlayers}}" wx:key="id">
+          <view class="row">
+            <view>座位 {{item.seatNo}} · {{item.name}}</view>
+            <view class="badge">玩家</view>
+          </view>
+        </view>
+      </view>
+      <view class="stack" style="margin-top: 16rpx;">
+        <button class="btn btn-primary btn-md btn-block" bindtap="onStartGame" wx:if="{{room.canStartGame}}">开始游戏</button>
+        <view class="small" wx:else>
+          <view wx:if="{{room.players.length < 3}}">至少 3 名玩家加入后可以开始。</view>
+          <view wx:else>只有创建房间的玩家可以开始游戏。</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="panel" wx:if="{{room.status === 'speaking'}}">
+      <view class="section-title">顺序发言</view>
+      <view class="list-item">
+        <view class="meta">当前发言玩家</view>
+        <view class="title" style="font-size: 44rpx;">{{room.currentSpeakerName}}</view>
+        <view class="small" wx:if="{{room.currentSpeakerSeatNo}}">座位 {{room.currentSpeakerSeatNo}}</view>
+      </view>
+
+      <view class="divider"></view>
+
+      <view class="list-item" wx:if="{{room.canAdvanceSpeaker}}">
+        <view class="meta">轮到你发言</view>
+        <view class="small">发言结束后点击下一位，系统会切换到下一名存活玩家。</view>
+      </view>
+      <view class="list-item" wx:if="{{!room.canAdvanceSpeaker}}">
+        <view class="small">等待当前玩家发言结束。</view>
+      </view>
+
+      <view class="stack">
+        <button class="btn btn-primary btn-md btn-block" bindtap="onNextSpeaker" disabled="{{!room.canAdvanceSpeaker}}">{{room.nextSpeakerText}}</button>
+      </view>
+    </view>
+
+    <view class="panel" wx:if="{{room.status === 'voting'}}">
+      <view class="section-title">匿名投票</view>
+      <view class="small">所有存活玩家完成投票后，系统自动淘汰得票最高者并判断胜负。</view>
+      <view class="divider"></view>
+
+      <view wx:if="{{room.hasVoted}}">
+        <view class="list-item">
+          <view class="meta">你已提交投票</view>
+          <view class="small">等待其他玩家完成投票。</view>
+        </view>
+      </view>
+
+      <view wx:if="{{room.canVote}}">
+        <view class="list">
+          <view class="list-item" wx:for="{{room.votePlayers}}" wx:key="id">
+            <view class="row">
+              <view>
+                <view>{{item.name}}</view>
+                <view class="small">座位 {{item.seatNo}}</view>
+              </view>
+              <button class="btn btn-sm {{selectedVoteTargetId === item.id ? 'btn-primary' : 'btn-secondary'}}" data-id="{{item.id}}" bindtap="onVoteTargetTap">投票</button>
+            </view>
+          </view>
+        </view>
+        <view class="divider"></view>
+        <view class="row">
+          <button class="btn btn-ghost btn-md" bindtap="onVoteTargetTap" data-id="" wx:if="{{room.config.allowSkip}}">弃票</button>
+          <view wx:else></view>
+          <button class="btn btn-primary btn-md" bindtap="onSubmitVote">提交投票</button>
+        </view>
+      </view>
+
+      <view class="list-item" wx:if="{{room.me && !room.me.alive}}">
+        <view class="small">你已出局，可以继续观看投票进度。</view>
+      </view>
+
+      <view class="small" style="margin-top: 16rpx;">投票进度：{{room.votedCount}} / {{room.voteTotal}}</view>
+    </view>
+
+    <view class="panel" wx:if="{{room.status === 'finished'}}">
+      <view class="section-title">游戏结束</view>
+      <view class="title" style="font-size: 44rpx;">{{room.winner === 'spy' ? '卧底胜利' : '平民胜利'}}</view>
+      <view class="divider"></view>
+
+      <view class="list-item">
+        <view>平民词：{{room.selectedWordPair.civilianWord}}</view>
+        <view>卧底词：{{room.selectedWordPair.spyWord}}</view>
+      </view>
+
+      <view class="list">
+        <view class="list-item" wx:for="{{room.finishedPlayers}}" wx:key="id">
+          <view class="row">
+            <view>
+              <view>{{item.name}}</view>
+              <view class="small">座位 {{item.seatNo}}</view>
+            </view>
+            <view class="badge {{item.role === 'spy' ? 'badge-danger' : ''}}">{{item.role === 'spy' ? '卧底' : '平民'}}</view>
+          </view>
+          <view class="small" style="margin-top: 8rpx;">词语：{{item.word}}</view>
+        </view>
+      </view>
+
+      <view class="stack" style="margin-top: 16rpx;">
+        <button class="btn btn-primary btn-md btn-block" bindtap="onRestart">重新开始</button>
+        <button class="btn btn-secondary btn-md btn-block" bindtap="onBackHome">返回首页</button>
+      </view>
+    </view>
+  </block>
+</view>

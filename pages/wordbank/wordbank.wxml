@@ -1,0 +1,59 @@
+<view class="page">
+  <view class="panel">
+    <view class="row">
+      <view>
+        <view class="section-title">词库管理</view>
+        <view class="subtitle">支持新增、编辑、删除和设置默认词库。</view>
+      </view>
+      <button class="btn btn-primary btn-sm" bindtap="onAdd">新增</button>
+    </view>
+  </view>
+
+  <view class="panel">
+    <view class="list">
+      <view class="list-item" wx:for="{{wordBanks}}" wx:key="id">
+        <view class="row">
+          <view>
+            <view class="row" style="justify-content: flex-start;">
+              <view>{{item.name}}</view>
+              <view class="badge" wx:if="{{item.isDefault}}">默认</view>
+            </view>
+            <view class="small">{{item.civilianWord}} / {{item.spyWord}}</view>
+          </view>
+        </view>
+        <view class="divider"></view>
+        <view class="row">
+          <button class="btn btn-ghost btn-sm" data-id="{{item.id}}" bindtap="onSetDefault">设为默认</button>
+          <button class="btn btn-secondary btn-sm" data-id="{{item.id}}" bindtap="onEdit">编辑</button>
+          <button class="btn btn-danger btn-sm" data-id="{{item.id}}" bindtap="onDelete">删除</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="panel" wx:if="{{editing}}">
+    <view class="section-title">{{editing.id ? '编辑词库' : '新增词库'}}</view>
+    <view class="stack">
+      <view>
+        <view class="field-label">词库名称</view>
+        <input class="input" value="{{editing.name}}" bindinput="onNameInput" />
+      </view>
+      <view>
+        <view class="field-label">平民词</view>
+        <input class="input" value="{{editing.civilianWord}}" bindinput="onCivilianInput" />
+      </view>
+      <view>
+        <view class="field-label">卧底词</view>
+        <input class="input" value="{{editing.spyWord}}" bindinput="onSpyInput" />
+      </view>
+      <view class="row">
+        <view class="field-label" style="margin-bottom: 0;">设为默认词库</view>
+        <switch checked="{{editing.isDefault}}" bindchange="onDefaultToggle" color="#2563eb" />
+      </view>
+      <view class="row">
+        <button class="btn btn-secondary btn-md" bindtap="onCancel">取消</button>
+        <button class="btn btn-primary btn-md" bindtap="onSave">保存</button>
+      </view>
+    </view>
+  </view>
+</view>

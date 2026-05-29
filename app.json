@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/create/create",
+    "pages/join/join",
+    "pages/room/room",
+    "pages/wordbank/wordbank"
+  ],
+  "window": {
+    "navigationBarTitleText": "谁是卧底",
+    "navigationBarBackgroundColor": "#111827",
+    "navigationBarTextStyle": "white",
+    "backgroundTextStyle": "light"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

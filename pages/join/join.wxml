@@ -1,0 +1,21 @@
+<view class="page">
+  <view class="panel">
+    <view class="section-title">加入房间</view>
+    <view class="subtitle">输入房间号和你的昵称，昵称留空时系统会自动生成。</view>
+    <view class="divider"></view>
+
+    <view class="stack">
+      <view>
+        <view class="field-label">房间号</view>
+        <input class="input" placeholder="6 位房间号" value="{{form.roomCode}}" bindinput="onRoomCodeInput" />
+      </view>
+
+      <view>
+        <view class="field-label">你的昵称</view>
+        <input class="input" placeholder="例如：小张" value="{{form.playerName}}" bindinput="onPlayerNameInput" />
+      </view>
+
+      <button class="btn btn-primary btn-md btn-block" bindtap="onJoinRoom" loading="{{submitting}}">加入房间</button>
+    </view>
+  </view>
+</view>

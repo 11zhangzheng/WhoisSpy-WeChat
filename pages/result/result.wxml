@@ -1,0 +1,30 @@
+<view class="page">
+  <view class="panel" wx:if="{{game}}">
+    <view class="section-title">结果页</view>
+    <view class="title" style="font-size: 44rpx;">
+      {{game.winner === 'spy' ? '卧底胜利' : '平民胜利'}}
+    </view>
+    <view class="subtitle">卧底身份与全员真实身份如下。</view>
+
+    <view class="divider"></view>
+
+    <view class="list">
+      <view class="list-item" wx:for="{{players}}" wx:key="id">
+        <view class="row">
+          <view>
+            <view>{{item.name}}</view>
+            <view class="small">座位 {{item.seatNo}}</view>
+          </view>
+          <view class="badge {{item.role === 'spy' ? 'badge-danger' : ''}}">{{item.role === 'spy' ? '卧底' : '平民'}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="divider"></view>
+
+    <view class="stack">
+      <button class="btn btn-primary btn-md btn-block" bindtap="onRestart">重新开始</button>
+      <button class="btn btn-secondary btn-md btn-block" bindtap="onHome">返回首页</button>
+    </view>
+  </view>
+</view>

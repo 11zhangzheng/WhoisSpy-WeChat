@@ -1,0 +1,36 @@
+<view class="page">
+  <view class="panel">
+    <view class="section-title">创建房间</view>
+    <view class="subtitle">创建后自动入座为玩家 1，后续玩家用房间号加入。</view>
+    <view class="divider"></view>
+
+    <view class="stack">
+      <view>
+        <view class="field-label">你的昵称（可留空自动生成）</view>
+        <input class="input" placeholder="例如：阿明" value="{{form.playerName}}" bindinput="onPlayerNameInput" />
+      </view>
+
+      <view>
+        <view class="field-label">房间容量：{{form.playerCount}} 人</view>
+        <slider min="3" max="12" step="1" value="{{form.playerCount}}" bindchange="onPlayerCountChange" activeColor="#2563eb" />
+      </view>
+
+      <view>
+        <view class="field-label">词语来源</view>
+        <view class="list-item">系统会从内置词库随机抽取，创建者不能手动设置词语。</view>
+      </view>
+
+      <view class="row">
+        <view class="field-label" style="margin-bottom: 0;">显示玩家昵称</view>
+        <switch checked="{{form.showNickname}}" bindchange="onShowNicknameChange" color="#2563eb" />
+      </view>
+
+      <view class="row">
+        <view class="field-label" style="margin-bottom: 0;">允许弃票</view>
+        <switch checked="{{form.allowSkip}}" bindchange="onAllowSkipChange" color="#2563eb" />
+      </view>
+
+      <button class="btn btn-primary btn-md btn-block" bindtap="onCreateRoom" loading="{{submitting}}">创建并进入房间</button>
+    </view>
+  </view>
+</view>

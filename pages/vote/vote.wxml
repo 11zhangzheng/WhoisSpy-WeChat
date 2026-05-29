@@ -1,0 +1,87 @@
+<view class="page">
+  <view class="panel" wx:if="{{game}}">
+    <view class="row">
+      <view>
+        <view class="section-title">投票阶段</view>
+        <view class="meta">第 {{game.roundNo}} 局 · {{phaseLabel}}</view>
+      </view>
+      <view class="badge">{{aliveCount}} 人存活</view>
+    </view>
+
+    <view class="divider"></view>
+
+    <view wx:if="{{game.phase === 'voting'}}">
+      <view class="list-item">
+        <view class="field-label">当前投票人</view>
+        <view class="title" style="font-size: 40rpx;">{{currentVoter.name}}</view>
+        <view class="small">请选择投票对象或弃票</view>
+      </view>
+
+      <view class="divider"></view>
+
+      <view class="list">
+        <view class="list-item" wx:for="{{alivePlayers}}" wx:key="id">
+          <view class="row">
+            <view>
+              <view>{{item.name}}</view>
+              <view class="small">座位 {{item.seatNo}}</view>
+            </view>
+            <button class="btn btn-sm btn-secondary" data-target="{{item.id}}" bindtap="onChooseTarget">投给他</button>
+          </view>
+        </view>
+      </view>
+
+      <view class="divider"></view>
+
+      <view class="row">
+        <button class="btn btn-ghost btn-md" bindtap="onSkipVote" wx:if="{{allowSkip}}">弃票</button>
+        <view wx:else></view>
+        <button class="btn btn-primary btn-md" bindtap="onSubmitVote" disabled="{{!selectedTargetId && !isSkipSelected}}">提交本票</button>
+      </view>
+
+      <view class="small" style="margin-top: 16rpx;">已记录：{{game.votes.length}} / {{alivePlayers.length}}</view>
+    </view>
+
+    <view wx:if="{{game.phase === 'voting_result' || game.phase === 'round_end'}}">
+      <view class="list-item">
+        <view class="section-title">本轮统计</view>
+        <view class="list">
+          <view class="row" wx:for="{{voteSummaryList}}" wx:key="playerId">
+            <view>{{item.name}}</view>
+            <view class="badge">{{item.count}} 票</view>
+          </view>
+          <view class="row">
+            <view>弃票</view>
+            <view class="badge badge-warn">{{game.roundSummary.skipCount}} 票</view>
+          </view>
+        </view>
+      </view>
+
+      <view class="divider"></view>
+
+      <view class="list-item" wx:if="{{autoEliminateTarget}}">
+        <view class="meta">本轮自动判定淘汰</view>
+        <view class="title" style="font-size: 40rpx;">{{autoEliminateName}}</view>
+      </view>
+
+      <view class="list-item" wx:else>
+        <view class="meta">平票或无有效票，请手动选择淘汰者</view>
+        <view class="stack" style="margin-top: 16rpx;">
+          <button wx:for="{{alivePlayers}}" wx:key="id" class="btn btn-secondary btn-md btn-block" data-target="{{item.id}}" bindtap="onEliminateTarget">{{item.name}}</button>
+        </view>
+      </view>
+
+      <view class="divider"></view>
+
+      <button class="btn btn-danger btn-md btn-block" bindtap="onConfirmEliminate" disabled="{{!pendingEliminateTarget}}">确认淘汰</button>
+    </view>
+
+    <view wx:if="{{game.phase === 'finished'}}">
+      <view class="list-item">
+        <view class="section-title">游戏结束</view>
+        <view class="title" style="font-size: 44rpx;">{{game.winner === 'spy' ? '卧底胜利' : '平民胜利'}}</view>
+      </view>
+      <button class="btn btn-primary btn-md btn-block" bindtap="onToResult">查看结果</button>
+    </view>
+  </view>
+</view>

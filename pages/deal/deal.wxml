@@ -1,0 +1,29 @@
+<view class="page">
+  <view class="panel" wx:if="{{game}}">
+    <view class="row">
+      <view>
+        <view class="section-title">发词阶段</view>
+        <view class="meta">第 {{game.roundNo}} 局 · 第 {{game.dealIndex + 1}} / {{game.players.length}} 位</view>
+      </view>
+      <view class="badge">{{currentPlayer.name}}</view>
+    </view>
+
+    <view class="divider"></view>
+
+    <view class="list-item" wx:if="{{showWord}}">
+      <view class="meta">请只给当前玩家查看</view>
+      <view class="title" style="font-size: 52rpx; text-align: center; margin: 18rpx 0 6rpx;">{{currentPlayer.word}}</view>
+    </view>
+
+    <view class="list-item" wx:else>
+      <view class="meta" style="text-align: center;">点击显示词条</view>
+    </view>
+
+    <view class="divider"></view>
+
+    <view class="stack">
+      <button class="btn btn-primary btn-md btn-block" bindtap="onToggleWord">{{showWord ? '隐藏词' : '显示词'}}</button>
+      <button class="btn btn-secondary btn-md btn-block" bindtap="onNextPlayer">{{isLastPlayer ? '结束发词' : '下一位'}}</button>
+    </view>
+  </view>
+</view>

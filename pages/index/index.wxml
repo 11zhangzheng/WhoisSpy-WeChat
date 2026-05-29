@@ -1,0 +1,51 @@
+<view class="page">
+  <view class="panel">
+    <view class="title">谁是卧底</view>
+    <view class="subtitle">联机房间版，支持创建、加入、逐个发言、匿名投票和自动结算。</view>
+    <view class="divider"></view>
+
+    <view class="stack">
+      <view>
+        <view class="field-label">服务器地址</view>
+        <input class="input" placeholder="ws://192.168.1.10:3001" value="{{serverUrl}}" bindinput="onServerUrlInput" />
+        <view class="small" style="margin-top: 10rpx;">手机和服务端需要在同一局域网，或者使用可访问的 WebSocket 地址。</view>
+      </view>
+
+      <button class="btn btn-primary btn-md btn-block" bindtap="onContinueRoom" wx:if="{{session}}">继续当前房间</button>
+      <button class="btn btn-secondary btn-md btn-block" bindtap="onCreateRoom">创建房间</button>
+      <button class="btn btn-secondary btn-md btn-block" bindtap="onJoinRoom">加入房间</button>
+      <button class="btn btn-ghost btn-md btn-block" bindtap="onWordBank">词库管理</button>
+      <button class="btn btn-ghost btn-md btn-block" bindtap="onRulesToggle">{{showRules ? '收起规则' : '规则说明'}}</button>
+    </view>
+  </view>
+
+  <view class="panel" wx:if="{{lastConfig}}">
+    <view class="section-title">最近一次配置</view>
+    <view class="list-item">
+      <view>玩家名称：{{lastConfig.playerName || '未填写'}}</view>
+      <view>房间容量：{{lastConfig.playerCount}} 人</view>
+      <view>显示昵称：{{lastConfig.showNickname ? '是' : '否'}}</view>
+      <view>允许弃票：{{lastConfig.allowSkip ? '是' : '否'}}</view>
+    </view>
+  </view>
+
+  <view class="panel" wx:if="{{session}}">
+    <view class="section-title">当前会话</view>
+    <view class="list-item">
+      <view>房间号：{{session.roomCode}}</view>
+      <view>身份：玩家</view>
+    </view>
+    <button class="btn btn-ghost btn-md btn-block" bindtap="onClearSession">清除会话</button>
+  </view>
+
+  <view class="panel" wx:if="{{showRules}}">
+    <view class="section-title">规则说明</view>
+    <view class="subtitle">
+      1. 创建房间后，其他人用房间号加入。  
+      2. 游戏开始后，当前发言者点击“下一位”切换到下一名玩家。  
+      3. 发言结束后自动进入匿名投票。  
+      4. 所有存活玩家完成投票后，系统自动淘汰得票最高者并判断胜负。  
+      5. 游戏结束时会显示平民词和卧底词。
+    </view>
+  </view>
+</view>

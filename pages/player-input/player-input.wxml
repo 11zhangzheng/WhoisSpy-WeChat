@@ -1,0 +1,25 @@
+<view class="page">
+  <view class="panel">
+    <view class="section-title">输入玩家昵称</view>
+    <view class="subtitle">请按人数填写。关闭昵称时会自动生成“玩家1、玩家2...”</view>
+    <view class="divider"></view>
+
+    <view class="stack" wx:if="{{showNickname}}">
+      <block wx:for="{{names}}" wx:key="index">
+        <view>
+          <view class="field-label">玩家 {{index + 1}}</view>
+          <input class="input" placeholder="输入昵称" value="{{item}}" data-index="{{index}}" bindinput="onNameInput" />
+        </view>
+      </block>
+    </view>
+
+    <view class="stack" wx:else>
+      <view class="list-item" wx:for="{{names}}" wx:key="index">{{item}}</view>
+    </view>
+
+    <view class="stack" style="margin-top: 20rpx;">
+      <button class="btn btn-primary btn-md btn-block" bindtap="onStartGame">确认并开始发词</button>
+      <button class="btn btn-ghost btn-md btn-block" bindtap="onBack">返回</button>
+    </view>
+  </view>
+</view>
