@@ -1,3 +1,8 @@
 {
-  "navigationBarTitleText": "词库管理"
+  "navigationBarTitleText": "词库管理",
+  "usingComponents": {
+    "form-item": "../../components/form-item/form-item",
+    "primary-button": "../../components/primary-button/primary-button",
+    "bottom-action-bar": "../../components/bottom-action-bar/bottom-action-bar"
+  }
 }

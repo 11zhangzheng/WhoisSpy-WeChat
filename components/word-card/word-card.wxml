@@ -1,0 +1,9 @@
+<view class="word-card" wx:if="{{word}}">
+  <view class="word-card-label">{{role === 'spy' ? '卧底词' : '你的词语'}}</view>
+  <view class="word-card-word">{{word}}</view>
+  <view class="word-card-action" wx:if="{{showRefresh}}" bindtap="onRefresh">
+    <text class="word-card-refresh-icon">↻</text>
+    <text class="word-card-refresh-text">换一组</text>
+  </view>
+  <view class="word-card-hint">{{hint || '请只在自己的手机上查看'}}</view>
+</view>

@@ -1,0 +1,13 @@
+<view class="menu-card" bindtap="onTap">
+  <view class="menu-card-icon menu-card-icon-{{color}}">
+    <text>{{icon}}</text>
+  </view>
+  <view class="menu-card-content">
+    <view class="menu-card-title">{{title}}</view>
+    <view class="menu-card-subtitle" wx:if="{{subtitle}}">{{subtitle}}</view>
+  </view>
+  <view class="menu-card-badge" wx:if="{{badge}}">
+    <text>{{badge}}</text>
+  </view>
+  <view class="menu-card-arrow">›</view>
+</view>

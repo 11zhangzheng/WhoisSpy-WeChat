@@ -1,1 +1,260 @@
-/* 复用全局样式 */
+/* Loading & Error States */
+.loading-state,
+.error-state {
+  text-align: center;
+  padding: 120rpx 48rpx;
+}
+
+.loading-icon,
+.error-icon {
+  font-size: 80rpx;
+  margin-bottom: 24rpx;
+}
+
+.loading-text,
+.error-text {
+  font-size: 30rpx;
+  color: #888888;
+  margin-bottom: 48rpx;
+}
+
+/* Room Header */
+.room-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 32rpx;
+  background: #ffffff;
+  border-radius: 16rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.room-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.room-code-row {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.room-code {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #333333;
+}
+
+.copy-room-btn {
+  font-size: 28rpx;
+  color: #2563eb;
+  background: #eff6ff;
+  padding: 12rpx 24rpx;
+  border-radius: 999rpx;
+  font-weight: 600;
+}
+
+.copy-room-btn:active {
+  background: #dbeafe;
+}
+
+.room-phase {
+  font-size: 26rpx;
+  color: #888888;
+}
+
+.room-badge {
+  background: #e8f8f0;
+  color: #00b578;
+  font-size: 24rpx;
+  font-weight: 500;
+  padding: 8rpx 20rpx;
+  border-radius: 999rpx;
+}
+
+/* My Name Card */
+.my-name-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 32rpx;
+  background: #ffffff;
+  border-radius: 16rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.my-name-label {
+  font-size: 26rpx;
+  color: #888888;
+}
+
+.my-name-value {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+  flex: 1;
+  margin: 0 24rpx;
+}
+
+/* Phase Section */
+.phase-section {
+  margin-bottom: 24rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 20rpx;
+  padding: 0 8rpx;
+}
+
+.player-count {
+  font-size: 26rpx;
+  color: #888888;
+  margin-bottom: 20rpx;
+  padding: 0 8rpx;
+}
+
+/* Speaker Card */
+.speaker-card {
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 16rpx rgba(0, 0, 0, 0.04);
+  text-align: center;
+}
+
+.speaker-label {
+  font-size: 26rpx;
+  color: #888888;
+  margin-bottom: 12rpx;
+}
+
+.speaker-name {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: #00b578;
+  margin-bottom: 8rpx;
+}
+
+.speaker-seat {
+  font-size: 24rpx;
+  color: #bbbbbb;
+}
+
+/* Vote Header */
+.vote-header {
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.vote-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 12rpx;
+}
+
+.vote-progress {
+  font-size: 26rpx;
+  color: #888888;
+}
+
+/* Voted State */
+.voted-state {
+  background: #e8f8f0;
+  border-radius: 16rpx;
+  padding: 48rpx 32rpx;
+  text-align: center;
+  margin-bottom: 24rpx;
+}
+
+.voted-icon {
+  font-size: 64rpx;
+  color: #00b578;
+  margin-bottom: 16rpx;
+}
+
+.voted-text {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #009c6a;
+  margin-bottom: 8rpx;
+}
+
+.voted-hint {
+  font-size: 26rpx;
+  color: #888888;
+}
+
+/* Vote List */
+.vote-list {
+  margin-bottom: 24rpx;
+}
+
+/* Vote Actions */
+.vote-actions {
+  display: flex;
+  gap: 16rpx;
+}
+
+.vote-actions primary-button {
+  flex: 1;
+}
+
+/* Spectator State */
+.spectator-state {
+  background: #f5f5f5;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  text-align: center;
+}
+
+.spectator-text {
+  font-size: 26rpx;
+  color: #888888;
+}
+
+/* Action Section */
+.action-section {
+  margin-top: 32rpx;
+  padding: 0 8rpx;
+}
+
+.action-hint {
+  font-size: 24rpx;
+  color: #bbbbbb;
+  text-align: center;
+  margin-top: 16rpx;
+}
+
+/* Previous Result */
+.previous-result {
+  background: #fff3e0;
+  border-radius: 16rpx;
+  padding: 24rpx 32rpx;
+  margin-bottom: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.previous-result-label {
+  font-size: 26rpx;
+  color: #ff9800;
+}
+
+.previous-result-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #ff9800;
+}

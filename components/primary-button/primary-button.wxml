@@ -1,0 +1,3 @@
+<button class="primary-btn primary-btn-{{type}} {{block ? 'primary-btn-block' : ''}} {{disabled ? 'primary-btn-disabled' : ''}}" bindtap="onTap" loading="{{loading}}" disabled="{{disabled}}">
+  <text wx:if="{{!loading}}">{{text}}</text>
+</button>

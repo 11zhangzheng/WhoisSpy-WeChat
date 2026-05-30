@@ -86,13 +86,31 @@ Page({
     });
   },
 
+  onNameChange(e) {
+    this.setData({
+      'editing.name': e.detail.value,
+    });
+  },
+
   onCivilianInput(e) {
     this.setData({
       'editing.civilianWord': e.detail.value,
     });
   },
 
+  onCivilianChange(e) {
+    this.setData({
+      'editing.civilianWord': e.detail.value,
+    });
+  },
+
   onSpyInput(e) {
+    this.setData({
+      'editing.spyWord': e.detail.value,
+    });
+  },
+
+  onSpyChange(e) {
     this.setData({
       'editing.spyWord': e.detail.value,
     });

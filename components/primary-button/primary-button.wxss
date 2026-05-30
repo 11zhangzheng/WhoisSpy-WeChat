@@ -1,0 +1,58 @@
+.primary-btn {
+  border-radius: 16rpx;
+  border: none;
+  font-size: 34rpx;
+  font-weight: 600;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32rpx 48rpx;
+  transition: all 0.2s ease;
+}
+
+.primary-btn-primary {
+  background: #00b578;
+  color: #ffffff;
+}
+
+.primary-btn-primary:active {
+  background: #009c6a;
+  transform: scale(0.98);
+}
+
+.primary-btn-secondary {
+  background: #f0f0f0;
+  color: #333333;
+}
+
+.primary-btn-secondary:active {
+  background: #e0e0e0;
+}
+
+.primary-btn-danger {
+  background: #fa5151;
+  color: #ffffff;
+}
+
+.primary-btn-danger:active {
+  background: #e04040;
+}
+
+.primary-btn-ghost {
+  background: transparent;
+  color: #888888;
+}
+
+.primary-btn-ghost:active {
+  background: #f5f5f5;
+}
+
+.primary-btn-block {
+  width: 100%;
+}
+
+.primary-btn-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

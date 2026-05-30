@@ -1,3 +1,8 @@
 {
-  "navigationBarTitleText": "创建房间"
+  "navigationBarTitleText": "创建房间",
+  "usingComponents": {
+    "form-item": "../../components/form-item/form-item",
+    "primary-button": "../../components/primary-button/primary-button",
+    "bottom-action-bar": "../../components/bottom-action-bar/bottom-action-bar"
+  }
 }

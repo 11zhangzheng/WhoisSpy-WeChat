@@ -8,9 +8,10 @@
   ],
   "window": {
     "navigationBarTitleText": "谁是卧底",
-    "navigationBarBackgroundColor": "#111827",
-    "navigationBarTextStyle": "white",
-    "backgroundTextStyle": "light"
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundTextStyle": "dark",
+    "backgroundColor": "#f5f7fa"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

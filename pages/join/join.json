@@ -1,3 +1,7 @@
 {
-  "navigationBarTitleText": "加入房间"
+  "navigationBarTitleText": "加入房间",
+  "usingComponents": {
+    "form-item": "../../components/form-item/form-item",
+    "primary-button": "../../components/primary-button/primary-button"
+  }
 }

@@ -1,0 +1,22 @@
+<view class="player-grid">
+  <view
+    class="player-item {{item.alive === false ? 'player-item-dead' : ''}} {{currentSpeakerId === item.id ? 'player-item-speaking' : ''}} {{selectedIds && selectedIds.indexOf(item.id) !== -1 ? 'player-item-selected' : ''}}"
+    wx:for="{{players}}"
+    wx:key="id"
+    data-id="{{item.id}}"
+    bindtap="onPlayerTap"
+  >
+    <view class="player-avatar">
+      <view class="player-avatar-img {{item.role === 'spy' ? 'player-avatar-spy' : ''}}">
+        <text wx:if="{{item.alive === false}}">✕</text>
+        <text wx:elif="{{showSeatNo}}">{{item.seatNo}}</text>
+        <text wx:else>👤</text>
+      </view>
+      <view class="player-name">{{item.name}}</view>
+      <view class="player-seat" wx:if="{{showSeatNo}}">座位 {{item.seatNo}}</view>
+      <view class="player-badge" wx:if="{{item.role === 'spy' && showRoles}}">卧底</view>
+      <view class="player-badge player-badge-civilian" wx:elif="{{item.role === 'civilian' && showRoles}}">平民</view>
+      <view class="player-speaker" wx:if="{{currentSpeakerId === item.id}}">发言中</view>
+    </view>
+  </view>
+</view>

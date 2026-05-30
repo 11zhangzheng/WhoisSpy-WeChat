@@ -1,3 +1,11 @@
 {
-  "navigationBarTitleText": "房间"
+  "navigationBarTitleText": "房间",
+  "usingComponents": {
+    "primary-button": "../../components/primary-button/primary-button",
+    "player-grid": "../../components/player-grid/player-grid",
+    "word-card": "../../components/word-card/word-card",
+    "vote-item": "../../components/vote-item/vote-item",
+    "result-banner": "../../components/result-banner/result-banner",
+    "bottom-action-bar": "../../components/bottom-action-bar/bottom-action-bar"
+  }
 }

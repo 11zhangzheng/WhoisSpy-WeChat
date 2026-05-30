@@ -1,0 +1,10 @@
+<view class="bottom-bar">
+  <primary-button
+    text="{{text}}"
+    type="{{type}}"
+    block="{{true}}"
+    loading="{{loading}}"
+    disabled="{{disabled}}"
+    bindtap="onTap"
+  />
+</view>

@@ -1,0 +1,10 @@
+<view class="vote-item {{selected ? 'vote-item-selected' : ''}}" bindtap="onSelect">
+  <view class="vote-item-info">
+    <view class="vote-item-name">{{player.name}}</view>
+    <view class="vote-item-seat">座位 {{player.seatNo}}</view>
+  </view>
+  <view class="vote-item-action">
+    <view class="vote-item-check" wx:if="{{selected}}">✓</view>
+    <view class="vote-item-btn" wx:else>投票</view>
+  </view>
+</view>

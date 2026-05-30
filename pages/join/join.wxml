@@ -1,21 +1,43 @@
-<view class="page">
-  <view class="panel">
-    <view class="section-title">加入房间</view>
-    <view class="subtitle">输入房间号和你的昵称，昵称留空时系统会自动生成。</view>
-    <view class="divider"></view>
-
-    <view class="stack">
-      <view>
-        <view class="field-label">房间号</view>
-        <input class="input" placeholder="6 位房间号" value="{{form.roomCode}}" bindinput="onRoomCodeInput" />
-      </view>
-
-      <view>
-        <view class="field-label">你的昵称</view>
-        <input class="input" placeholder="例如：小张" value="{{form.playerName}}" bindinput="onPlayerNameInput" />
-      </view>
-
-      <button class="btn btn-primary btn-md btn-block" bindtap="onJoinRoom" loading="{{submitting}}">加入房间</button>
+<view class="page-safe">
+  <!-- Room Code Input -->
+  <view class="join-section">
+    <view class="join-card">
+      <view class="join-icon">🏠</view>
+      <view class="join-title">输入房间号</view>
+      <view class="join-hint">向房主获取6位房间号</view>
+      <input
+        class="join-input"
+        placeholder="请输入房间号"
+        value="{{form.roomCode}}"
+        bindinput="onRoomCodeInput"
+        maxlength="6"
+      />
     </view>
+  </view>
+
+  <!-- Player Name Input -->
+  <view class="join-section">
+    <view class="join-card">
+      <view class="join-icon">👤</view>
+      <view class="join-title">你的昵称</view>
+      <view class="join-hint">留空将自动生成</view>
+      <input
+        class="join-input"
+        placeholder="例如：小张"
+        value="{{form.playerName}}"
+        bindinput="onPlayerNameInput"
+      />
+    </view>
+  </view>
+
+  <!-- Join Button -->
+  <view class="join-action">
+    <primary-button
+      text="加入房间"
+      type="primary"
+      block="{{true}}"
+      loading="{{submitting}}"
+      bindtap="onJoinRoom"
+    />
   </view>
 </view>

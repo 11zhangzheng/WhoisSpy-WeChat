@@ -1,0 +1,9 @@
+<view class="app-header">
+  <view class="app-header-left" wx:if="{{showBack}}" bindtap="onBack">
+    <text class="app-header-back">←</text>
+  </view>
+  <view class="app-header-title">{{title}}</view>
+  <view class="app-header-right">
+    <slot name="right"></slot>
+  </view>
+</view>

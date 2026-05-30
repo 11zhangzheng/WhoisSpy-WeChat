@@ -1,0 +1,44 @@
+<view class="form-item">
+  <view class="form-item-label" wx:if="{{label}}">{{label}}</view>
+
+  <!-- Input Type -->
+  <input
+    wx:if="{{type === 'input'}}"
+    class="form-item-input {{focus ? 'form-item-input-focus' : ''}}"
+    placeholder="{{placeholder}}"
+    value="{{value}}"
+    bindinput="onInput"
+    bindfocus="onFocus"
+    bindblur="onBlur"
+  />
+
+  <!-- Textarea Type -->
+  <textarea
+    wx:elif="{{type === 'textarea'}}"
+    class="form-item-textarea"
+    placeholder="{{placeholder}}"
+    value="{{value}}"
+    bindinput="onInput"
+  />
+
+  <!-- Stepper Type -->
+  <view wx:elif="{{type === 'stepper'}}" class="form-item-stepper">
+    <button class="stepper-btn {{value <= min ? 'stepper-btn-disabled' : ''}}" bindtap="onMinus">−</button>
+    <text class="stepper-value">{{value}}</text>
+    <button class="stepper-btn {{value >= max ? 'stepper-btn-disabled' : ''}}" bindtap="onPlus">+</button>
+  </view>
+
+  <!-- Toggle Type -->
+  <view wx:elif="{{type === 'toggle'}}" class="form-item-toggle">
+    <switch checked="{{value}}" bindchange="onToggle" color="#00b578" />
+  </view>
+
+  <!-- Picker Type -->
+  <view wx:elif="{{type === 'picker'}}" class="form-item-picker" bindtap="onPickerTap">
+    <text class="{{value ? '' : 'form-item-picker-placeholder'}}">{{value || placeholder}}</text>
+    <text class="form-item-picker-arrow">›</text>
+  </view>
+
+  <!-- Hint -->
+  <view class="form-item-hint" wx:if="{{hint}}">{{hint}}</view>
+</view>

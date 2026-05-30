@@ -1,58 +1,73 @@
-<view class="page">
-  <view class="panel">
-    <view class="row">
-      <view>
-        <view class="section-title">词库管理</view>
-        <view class="subtitle">支持新增、编辑、删除和设置默认词库。</view>
+<view class="page-safe">
+  <!-- Add Button -->
+  <view class="add-section">
+    <primary-button text="＋ 新增词库" type="primary" block="{{true}}" bindtap="onAdd" />
+  </view>
+
+  <!-- Word Bank List -->
+  <view class="bank-list">
+    <view class="bank-card" wx:for="{{wordBanks}}" wx:key="id">
+      <view class="bank-header">
+        <view class="bank-name">{{item.name}}</view>
+        <view class="bank-badge" wx:if="{{item.isDefault}}">默认</view>
       </view>
-      <button class="btn btn-primary btn-sm" bindtap="onAdd">新增</button>
+      <view class="bank-words">
+        <view class="bank-word">
+          <text class="bank-word-label">平民词</text>
+          <text class="bank-word-value">{{item.civilianWord}}</text>
+        </view>
+        <view class="bank-word-divider">/</view>
+        <view class="bank-word">
+          <text class="bank-word-label">卧底词</text>
+          <text class="bank-word-value">{{item.spyWord}}</text>
+        </view>
+      </view>
+      <view class="bank-actions">
+        <primary-button text="设为默认" type="ghost" bindtap="onSetDefault" data-id="{{item.id}}" wx:if="{{!item.isDefault}}" />
+        <primary-button text="编辑" type="secondary" bindtap="onEdit" data-id="{{item.id}}" />
+        <primary-button text="删除" type="danger" bindtap="onDelete" data-id="{{item.id}}" />
+      </view>
     </view>
   </view>
 
-  <view class="panel">
-    <view class="list">
-      <view class="list-item" wx:for="{{wordBanks}}" wx:key="id">
-        <view class="row">
-          <view>
-            <view class="row" style="justify-content: flex-start;">
-              <view>{{item.name}}</view>
-              <view class="badge" wx:if="{{item.isDefault}}">默认</view>
-            </view>
-            <view class="small">{{item.civilianWord}} / {{item.spyWord}}</view>
-          </view>
-        </view>
-        <view class="divider"></view>
-        <view class="row">
-          <button class="btn btn-ghost btn-sm" data-id="{{item.id}}" bindtap="onSetDefault">设为默认</button>
-          <button class="btn btn-secondary btn-sm" data-id="{{item.id}}" bindtap="onEdit">编辑</button>
-          <button class="btn btn-danger btn-sm" data-id="{{item.id}}" bindtap="onDelete">删除</button>
-        </view>
-      </view>
-    </view>
-  </view>
+  <!-- Edit Form -->
+  <view class="edit-modal" wx:if="{{editing}}">
+    <view class="edit-mask" bindtap="onCancel"></view>
+    <view class="edit-content">
+      <view class="edit-title">{{editing.id ? '编辑词库' : '新增词库'}}</view>
 
-  <view class="panel" wx:if="{{editing}}">
-    <view class="section-title">{{editing.id ? '编辑词库' : '新增词库'}}</view>
-    <view class="stack">
-      <view>
-        <view class="field-label">词库名称</view>
-        <input class="input" value="{{editing.name}}" bindinput="onNameInput" />
+      <form-item
+        label="词库名称"
+        type="input"
+        placeholder="例如：水果"
+        value="{{editing.name}}"
+        bindchange="onNameChange"
+      />
+
+      <form-item
+        label="平民词"
+        type="input"
+        placeholder="例如：苹果"
+        value="{{editing.civilianWord}}"
+        bindchange="onCivilianChange"
+      />
+
+      <form-item
+        label="卧底词"
+        type="input"
+        placeholder="例如：梨子"
+        value="{{editing.spyWord}}"
+        bindchange="onSpyChange"
+      />
+
+      <view class="toggle-row">
+        <text class="toggle-label">设为默认词库</text>
+        <switch checked="{{editing.isDefault}}" bindchange="onDefaultToggle" color="#00b578" />
       </view>
-      <view>
-        <view class="field-label">平民词</view>
-        <input class="input" value="{{editing.civilianWord}}" bindinput="onCivilianInput" />
-      </view>
-      <view>
-        <view class="field-label">卧底词</view>
-        <input class="input" value="{{editing.spyWord}}" bindinput="onSpyInput" />
-      </view>
-      <view class="row">
-        <view class="field-label" style="margin-bottom: 0;">设为默认词库</view>
-        <switch checked="{{editing.isDefault}}" bindchange="onDefaultToggle" color="#2563eb" />
-      </view>
-      <view class="row">
-        <button class="btn btn-secondary btn-md" bindtap="onCancel">取消</button>
-        <button class="btn btn-primary btn-md" bindtap="onSave">保存</button>
+
+      <view class="edit-actions">
+        <primary-button text="取消" type="ghost" bindtap="onCancel" />
+        <primary-button text="保存" type="primary" bindtap="onSave" />
       </view>
     </view>
   </view>

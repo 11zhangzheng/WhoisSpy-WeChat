@@ -7,6 +7,7 @@ Page({
     lastConfig: null,
     session: null,
     showRules: false,
+    showConfig: false,
   },
 
   onShow() {
@@ -43,6 +44,10 @@ Page({
 
   onRulesToggle() {
     this.setData({ showRules: !this.data.showRules });
+  },
+
+  onToggleConfig() {
+    this.setData({ showConfig: !this.data.showConfig });
   },
 
   onClearSession() {

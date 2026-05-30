@@ -1,36 +1,111 @@
-<view class="page">
-  <view class="panel">
-    <view class="section-title">创建房间</view>
-    <view class="subtitle">创建后自动入座为玩家 1，后续玩家用房间号加入。</view>
-    <view class="divider"></view>
-
-    <view class="stack">
-      <view>
-        <view class="field-label">你的昵称（可留空自动生成）</view>
-        <input class="input" placeholder="例如：阿明" value="{{form.playerName}}" bindinput="onPlayerNameInput" />
-      </view>
-
-      <view>
-        <view class="field-label">房间容量：{{form.playerCount}} 人</view>
-        <slider min="3" max="12" step="1" value="{{form.playerCount}}" bindchange="onPlayerCountChange" activeColor="#2563eb" />
-      </view>
-
-      <view>
-        <view class="field-label">词语来源</view>
-        <view class="list-item">系统会从内置词库随机抽取，创建者不能手动设置词语。</view>
-      </view>
-
-      <view class="row">
-        <view class="field-label" style="margin-bottom: 0;">显示玩家昵称</view>
-        <switch checked="{{form.showNickname}}" bindchange="onShowNicknameChange" color="#2563eb" />
-      </view>
-
-      <view class="row">
-        <view class="field-label" style="margin-bottom: 0;">允许弃票</view>
-        <switch checked="{{form.allowSkip}}" bindchange="onAllowSkipChange" color="#2563eb" />
-      </view>
-
-      <button class="btn btn-primary btn-md btn-block" bindtap="onCreateRoom" loading="{{submitting}}">创建并进入房间</button>
+<view class="page-safe">
+  <!-- Basic Settings -->
+  <view class="section-group">
+    <view class="section-group-title">基础设置</view>
+    <view class="section-group-card">
+      <form-item
+        label="房间名称"
+        type="input"
+        placeholder="欢乐局"
+        value="{{form.roomName}}"
+        bindchange="onRoomNameChange"
+      />
+      <view class="divider"></view>
+      <form-item
+        label="玩家人数"
+        type="stepper"
+        value="{{form.playerCount}}"
+        min="{{3}}"
+        max="{{12}}"
+        hint="3-12人"
+        bindchange="onPlayerCountChange"
+      />
+      <view class="divider"></view>
+      <form-item
+        label="卧底人数"
+        type="stepper"
+        value="{{form.spyCount}}"
+        min="{{1}}"
+        max="{{3}}"
+        hint="通常1人"
+        bindchange="onSpyCountChange"
+      />
+      <view class="divider"></view>
+      <form-item
+        label="游戏轮数"
+        type="stepper"
+        value="{{form.rounds}}"
+        min="{{1}}"
+        max="{{10}}"
+        hint="3轮"
+        bindchange="onRoundsChange"
+      />
     </view>
   </view>
+
+  <!-- Timer Settings -->
+  <view class="section-group">
+    <view class="section-group-title">计时设置</view>
+    <view class="section-group-card">
+      <form-item
+        label="发词时间"
+        type="stepper"
+        value="{{form.dealTime}}"
+        min="{{10}}"
+        max="{{60}}"
+        hint="秒"
+        bindchange="onDealTimeChange"
+      />
+      <view class="divider"></view>
+      <form-item
+        label="讨论时间"
+        type="stepper"
+        value="{{form.discussTime}}"
+        min="{{30}}"
+        max="{{180}}"
+        hint="秒"
+        bindchange="onDiscussTimeChange"
+      />
+    </view>
+  </view>
+
+  <!-- Word Bank Selection -->
+  <view class="section-group">
+    <view class="section-group-title">词库选择</view>
+    <view class="section-group-card">
+      <form-item
+        label="当前词库"
+        type="picker"
+        placeholder="默认词库"
+        value="{{form.wordBankName}}"
+        bindtap="onWordBankTap"
+      />
+    </view>
+  </view>
+
+  <!-- Advanced Settings -->
+  <view class="section-group">
+    <view class="section-group-title">高级设置</view>
+    <view class="section-group-card">
+      <view class="toggle-row">
+        <text class="toggle-label">允许观战</text>
+        <switch checked="{{form.allowSpectate}}" bindchange="onAllowSpectateChange" color="#00b578" />
+      </view>
+      <view class="toggle-row">
+        <text class="toggle-label">显示玩家昵称</text>
+        <switch checked="{{form.showNickname}}" bindchange="onShowNicknameChange" color="#00b578" />
+      </view>
+      <view class="toggle-row">
+        <text class="toggle-label">允许弃票</text>
+        <switch checked="{{form.allowSkip}}" bindchange="onAllowSkipChange" color="#00b578" />
+      </view>
+    </view>
+  </view>
+
+  <!-- Bottom Action Bar -->
+  <bottom-action-bar
+    text="创建房间"
+    loading="{{submitting}}"
+    bindtap="onCreateRoom"
+  />
 </view>

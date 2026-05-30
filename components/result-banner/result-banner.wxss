@@ -1,0 +1,44 @@
+.result-banner {
+  padding: 48rpx 32rpx;
+  text-align: center;
+  border-radius: 20rpx;
+  margin-bottom: 32rpx;
+}
+
+.result-banner-win {
+  background: linear-gradient(135deg, #e8f8f0 0%, #d0f0e0 100%);
+}
+
+.result-banner-lose {
+  background: linear-gradient(135deg, #fde8e8 0%, #fdd0d0 100%);
+}
+
+.result-banner-icon {
+  font-size: 80rpx;
+  margin-bottom: 16rpx;
+}
+
+.result-banner-text {
+  font-size: 44rpx;
+  font-weight: 700;
+  margin-bottom: 16rpx;
+}
+
+.result-banner-win .result-banner-text {
+  color: #009c6a;
+}
+
+.result-banner-lose .result-banner-text {
+  color: #fa5151;
+}
+
+.result-banner-words {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.result-banner-word {
+  font-size: 26rpx;
+  color: #666666;
+}

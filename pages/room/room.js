@@ -150,7 +150,16 @@ Page({
   },
 
   onVoteTargetTap(e) {
-    this.setData({ selectedVoteTargetId: e.currentTarget.dataset.id });
+    this.setData({ selectedVoteTargetId: e.detail.id });
+  },
+
+  onPlayerSelect(e) {
+    // Handle player selection if needed
+    console.log('Player selected:', e.detail.id);
+  },
+
+  onSkipVote() {
+    this.setData({ selectedVoteTargetId: '' });
   },
 
   async onSubmitVote() {

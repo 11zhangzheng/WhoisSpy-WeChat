@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "primary-button": "../primary-button/primary-button"
+  }
+}

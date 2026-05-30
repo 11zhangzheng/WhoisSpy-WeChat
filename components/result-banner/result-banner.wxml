@@ -1,0 +1,8 @@
+<view class="result-banner {{winner === 'spy' ? 'result-banner-lose' : 'result-banner-win'}}">
+  <view class="result-banner-icon">{{winner === 'spy' ? '😞' : '🎉'}}</view>
+  <view class="result-banner-text">{{winner === 'spy' ? '卧底胜利' : '平民胜利'}}</view>
+  <view class="result-banner-words" wx:if="{{civilianWord && spyWord}}">
+    <view class="result-banner-word">平民词：{{civilianWord}}</view>
+    <view class="result-banner-word">卧底词：{{spyWord}}</view>
+  </view>
+</view>
